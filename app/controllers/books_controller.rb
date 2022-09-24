@@ -22,8 +22,6 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
-    @book.save
-    redirect_to book_path(@book)
   end
 
   def update

@@ -1,8 +1,36 @@
 <h1>Editing Book</h1>
 
-<form>
-<%= render 'form', book: @book %>
-</form>
+<%= form_with model: @book, local: true do |f| %>
+  <% if @book.errors.any? %>
+    <div>
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+      <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div><br>
+
+  <div>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+
+  <div><br>
+    <%= f.submit " Update Book " %>
+  </div>
+
+<% end %>
+<br>
+
 
 <%= link_to 'Show', @book %> |
 <%= link_to 'Back', books_path %>
