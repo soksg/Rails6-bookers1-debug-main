@@ -11,6 +11,7 @@ class BooksController < ApplicationController
       flash[:notice] = "Book was successfully created."
       redirect_to book_path(@book.id)
     else
+      @books=Book.all
       render :index
     end
   end
@@ -21,11 +22,13 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    @book.save
+    redirect_to book_path(@book)
   end
 
   def update
     @book = Book.find(params[:id])
-    if @book.update()
+    if @book.update(book_params)
       flash[:notice] = "Book was successfully updated."
       redirect_to book_path(@book.id)
     else
